@@ -1,27 +1,21 @@
-﻿namespace WebApi.BookOperations;
+﻿using AutoMapper;
+
+namespace WebApi.BookOperations;
 
 public class GetBooksQuery
 {
     private readonly BookStoreDbContext DbContext;
-    public GetBooksQuery(BookStoreDbContext dbContext) 
+    private readonly IMapper Mapper;
+    public GetBooksQuery(BookStoreDbContext dbContext, IMapper mapper) 
     {
         DbContext = dbContext;
+        Mapper = mapper;
     }
 
     public List<BooksViewModel> Handle()
     {
         var bookList = DbContext.Books.OrderBy(x => x.Id).ToList<Book>();
-        List<BooksViewModel> vm = new List<BooksViewModel>();
-        foreach (var book in bookList) 
-        {
-            vm.Add(new BooksViewModel()
-            {
-                Title = book.Title,
-                Genre = ((GenreEnum)book.GenreId).ToString(),
-                PublishDate = book.PublishDate.Date.ToString("dd/MM/yyyy"),
-                PageCount = book.PageCount,
-            });
-        }
+        List<BooksViewModel> vm = Mapper.Map<List<BooksViewModel>>(bookList);
         return vm;
 
     }
