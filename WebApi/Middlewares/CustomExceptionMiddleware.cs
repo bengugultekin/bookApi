@@ -7,9 +7,11 @@ namespace WebApi;
 public class CustomExceptionMiddleware
 {
     private readonly RequestDelegate _next;
-    public CustomExceptionMiddleware(RequestDelegate next)
+    private readonly ILoggerService LoggerService;
+    public CustomExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
     {
         _next = next;
+        LoggerService = loggerService;
     }
 
     public async Task Invoke (HttpContext context)
@@ -18,13 +20,13 @@ public class CustomExceptionMiddleware
         try
         {
             string message = "[Request]  HTTP" + context.Request.Method + " - " + context.Request.Path;
-            Console.WriteLine(message);
+            LoggerService.Write(message);
 
             await _next(context);
             watch.Stop();
 
             message = "[Response] HTTP" + context.Request.Method + " - " + context.Request.Path + " responded " + context.Response.StatusCode + " in " + watch.Elapsed.TotalMilliseconds + " ms ";
-            Console.WriteLine(message);
+            LoggerService.Write(message);
         }
         catch (Exception ex)
         {
@@ -39,7 +41,7 @@ public class CustomExceptionMiddleware
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
         string message = "[Error]    HTTP" + context.Request.Method + " - " + context.Response.StatusCode + " Error Message " + ex.Message + " in " + watch.Elapsed.TotalMilliseconds + " ms ";
-        Console.WriteLine(message);
+        LoggerService.Write(message);
 
         var result = JsonConvert.SerializeObject(new { error = ex.Message }, Formatting.None);
         return context.Response.WriteAsync(result);
