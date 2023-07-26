@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi;
 
@@ -13,6 +12,26 @@ public class DataGenerator
             {
                 return;
             }
+            context.Authors.AddRange(
+                new Author 
+                {
+                    FirstName = "Victor",
+                    LastName = "Hugo",
+                    DateOfBirth = new DateTime(1802, 02, 26)
+                },
+                new Author
+                {
+                    FirstName = "William",
+                    LastName = "Shakespeare",
+                    DateOfBirth = new DateTime(1564, 04, 14)
+                },
+                new Author
+                {
+                    FirstName = "Stefan",
+                    LastName = "Zweig",
+                    DateOfBirth = new DateTime(1881, 11, 28)
+                }
+                );
             context.Genres.AddRange(
                 new Genre
                 {
