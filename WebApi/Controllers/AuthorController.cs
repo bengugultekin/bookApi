@@ -24,7 +24,7 @@ public class AuthorController : ControllerBase
     public IActionResult GetAuthors()
     {
         GetAuthorsQuery query = new GetAuthorsQuery(_context, _mapper);
-        var obj = query.Handle;
+        var obj = query.Handle();
         return Ok(obj);
     }
 
@@ -36,7 +36,7 @@ public class AuthorController : ControllerBase
         GetGenreDetailQueryValidator validator = new GetGenreDetailQueryValidator();
         validator.ValidateAndThrow(query);
 
-        var obj = query.Handle;
+        var obj = query.Handle();
         return Ok(obj);
     }
 
