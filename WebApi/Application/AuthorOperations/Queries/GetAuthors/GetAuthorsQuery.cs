@@ -15,7 +15,7 @@ public class GetAuthorsQuery
 
     public List<AuthorsViewModel> Handle()
     {
-        var authors = _dbContext.Authors.OrderBy(x => x.Id).ToList();
+        var authors = _dbContext.Authors.Where(x => x.IsPublished).OrderBy(x => x.Id).ToList();
         List<AuthorsViewModel> vm = _mapper.Map<List<AuthorsViewModel>>(authors);
         return vm;
     }
@@ -26,5 +26,6 @@ public class AuthorsViewModel
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
+    public bool IsPublished { get; set; }
 }
 

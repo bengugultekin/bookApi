@@ -18,6 +18,10 @@ public class DeleteAuthorCommand
         {
             throw new InvalidOperationException("Silinecek Yazar Bulunamadı");
         }
+        else if (author.IsPublished == true)
+        {
+            throw new InvalidOperationException("Yazarın yayında olan kitapları bulunuyor. Önce kitapları silin.");
+        }
         _dbContext.Authors.Remove(author);
         _dbContext.SaveChanges();
     }

@@ -17,7 +17,8 @@ public class DataGenerator
                 {
                     FirstName = "Victor",
                     LastName = "Hugo",
-                    DateOfBirth = new DateTime(1802, 02, 26)
+                    DateOfBirth = new DateTime(1802, 02, 26),
+                    IsPublished = true
                 },
                 new Author
                 {
@@ -52,6 +53,7 @@ public class DataGenerator
                 {
                     Title = "Lean Startup",
                     GenreId = 1,
+                    AuthorId = 1,
                     PageCount = 200,
                     PublishDate = new DateTime(2001, 06, 12)
                 },
@@ -59,6 +61,7 @@ public class DataGenerator
                 {
                     Title = "Herland",
                     GenreId = 2,
+                    AuthorId = 1,
                     PageCount = 250,
                     PublishDate = new DateTime(2010, 05, 23)
                 },
@@ -66,6 +69,7 @@ public class DataGenerator
                 {
                     Title = "Dune",
                     GenreId = 2,
+                    AuthorId = 1,
                     PageCount = 540,
                     PublishDate = new DateTime(2001, 12, 21)
                 }

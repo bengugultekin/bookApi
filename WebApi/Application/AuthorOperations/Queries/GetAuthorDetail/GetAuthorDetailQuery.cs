@@ -17,7 +17,7 @@ public class GetAuthorDetailQuery
 
     public AuthorDetailViewModel Handle()
     {
-        var author = _dbContext.Authors.SingleOrDefault(x => x.Id == AuthorId);
+        var author = _dbContext.Authors.SingleOrDefault(x =>x.IsPublished && x.Id == AuthorId);
         if(author is null) 
         {
             throw new InvalidOperationException("Yazar Bulunamadı");
@@ -32,4 +32,5 @@ public class AuthorDetailViewModel
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
+    public bool IsPublished { get; set; }
 }

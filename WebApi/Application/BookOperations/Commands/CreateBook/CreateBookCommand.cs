@@ -24,12 +24,21 @@ public class CreateBookCommand
 
         DbContext.Books.Add(book);
         DbContext.SaveChanges();
+
+        // Yeni bir kitap eklendiğinde, yazarın IsPublished özelliği true olmalı
+        var author = DbContext.Authors.FirstOrDefault(x => x.Id == Model.AuthorId);
+        if(author != null) 
+        {
+            author.IsPublished = true;
+            DbContext.SaveChanges();
+        }
     }
 
     public class CreateBookModel
     {
         public string Title { get; set; }
         public int GenreId { get; set; }
+        public int AuthorId { get; set; }
         public int PageCount { get; set; }
         public DateTime PublishDate { get; set; }
     }

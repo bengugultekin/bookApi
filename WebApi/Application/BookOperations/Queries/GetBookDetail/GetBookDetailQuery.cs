@@ -17,7 +17,7 @@ public class GetBookDetailQuery
 
     public BookDetailViewModel Handle()
     {
-        var book = DbContext.Books.Include(x => x.Genre).Where(book => book.Id == BookId).SingleOrDefault();
+        var book = DbContext.Books.Include(x => x.Genre).Include(x => x.Author).Where(book => book.Id == BookId).SingleOrDefault();
         if (book is null) 
         {
             throw new InvalidOperationException("Kitap bulunamadı");
@@ -31,6 +31,7 @@ public class BookDetailViewModel
 {
     public string Title { get; set; }
     public string Genre { get; set; }
+    public string Author { get; set; }
     public int PageCount { get; set; }
     public string PublishDate { get; set; }
 }
