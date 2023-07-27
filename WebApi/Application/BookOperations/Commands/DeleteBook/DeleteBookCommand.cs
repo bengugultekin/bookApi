@@ -2,9 +2,9 @@
 
 public class DeleteBookCommand
 {
-    private readonly BookStoreDbContext DbContext;
+    private readonly IBookStoreDbContext DbContext;
     public int BookId { get; set; }
-    public DeleteBookCommand(BookStoreDbContext dbContext)
+    public DeleteBookCommand(IBookStoreDbContext dbContext)
     {
         DbContext = dbContext;
     }

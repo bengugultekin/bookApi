@@ -2,11 +2,11 @@
 
 public class UpdateAuthorCommand
 {
-    private readonly BookStoreDbContext _dbContext;
+    private readonly IBookStoreDbContext _dbContext;
     public int AuthorId { get; set; }
     public UpdateAuthorViewModel model { get; set; }
 
-    public UpdateAuthorCommand(BookStoreDbContext dbContext)
+    public UpdateAuthorCommand(IBookStoreDbContext dbContext)
     {
         _dbContext = dbContext;
     }

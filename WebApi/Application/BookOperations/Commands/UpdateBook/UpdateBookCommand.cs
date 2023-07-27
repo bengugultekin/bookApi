@@ -2,11 +2,11 @@
 
 public class UpdateBookCommand
 {
-    private readonly BookStoreDbContext DbContext;
+    private readonly IBookStoreDbContext DbContext;
     public int BookId { get; set; }
     public int AuthorId { get; set; }
     public UpdateBookModel Model {get; set; }
-    public UpdateBookCommand(BookStoreDbContext dbContext)
+    public UpdateBookCommand(IBookStoreDbContext dbContext)
     {
         DbContext = dbContext;
     }
@@ -21,7 +21,7 @@ public class UpdateBookCommand
         int oldAuthorId = book.AuthorId;
 
         book.GenreId = Model.GenreId != default ? Model.GenreId : book.GenreId;
-        book.AuthorId = Model.AuthotId != default ? Model.AuthotId : book.AuthorId;
+        book.AuthorId = Model.AuthorId != default ? Model.AuthorId : book.AuthorId;
         book.Title = Model.Title != default ? Model.Title : book.Title;
         DbContext.SaveChanges();
 
@@ -48,6 +48,6 @@ public class UpdateBookCommand
     {
         public string Title { get; set; }
         public int GenreId { get; set; }
-        public int AuthotId { get; set; }
+        public int AuthorId { get; set; }
     }
 }
