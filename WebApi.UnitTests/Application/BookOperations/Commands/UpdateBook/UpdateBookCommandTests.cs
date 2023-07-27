@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
 using WebApi.BookOperations;
 using static WebApi.BookOperations.UpdateBookCommand;
 
@@ -10,12 +8,10 @@ namespace WebApi.UnitTests.Application.BookOperations.Commands;
 public class UpdateBookCommandTests : IClassFixture<CommonTestFixture>
 {
     private readonly BookStoreDbContext _dbContext;
-    private readonly IMapper _mapper;
 
     public UpdateBookCommandTests(CommonTestFixture testFixture)
     {
         _dbContext = testFixture.Context;
-        _mapper = testFixture.Mapper;
     }
 
     //Happy Test - Güncellenecek Kitap Id si Mevcut İse
